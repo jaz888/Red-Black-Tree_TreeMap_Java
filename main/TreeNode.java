@@ -1,6 +1,8 @@
 package main;
 
 public class TreeNode{
-  private Color color;
-  
+    public Color color;
+    public TreeNode parent;
+    public TreeNode left;
+    public TreeNode right;
 }

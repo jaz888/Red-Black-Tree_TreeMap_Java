@@ -3,7 +3,7 @@
 // the file "file-name" contains the initial sorted list
 import main.*;
 public class bbst{
-  public static void main(String[] args){
-    
-  }
+    public static void main(String[] args){
+        
+    }
 }
