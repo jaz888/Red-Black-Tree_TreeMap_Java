@@ -25,5 +25,12 @@ public class bbst {
         System.out.println("count 2:"+rbt.count(2));
         System.out.println("inrange 3 5:"+rbt.inRange(3,5));
         System.out.println("inrange 2 7:"+rbt.inRange(2,7));
+        System.out.println("next 2:"+rbt.next(2).key+","+rbt.next(2).val);
+        System.out.println("next 4:"+rbt.next(4).key+","+rbt.next(4).val);
+        System.out.println("next 6:"+rbt.next(6).key+","+rbt.next(6).val);
+
+        System.out.println("previous 3:"+rbt.previous(3).key+","+rbt.previous(3).val);
+        System.out.println("previous 1:"+rbt.previous(1).key+","+rbt.previous(1).val);
+        System.out.println("previous 6:"+rbt.previous(6).key+","+rbt.previous(6).val);
     }
 }

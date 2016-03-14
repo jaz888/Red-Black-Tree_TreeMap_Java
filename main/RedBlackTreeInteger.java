@@ -77,4 +77,41 @@ public class RedBlackTreeInteger extends RedBlackTree<Integer, Integer>{
         System.out.println("sum="+sum);
         return sum;
     }
+
+    public TreeNode<Integer, Integer> next(Integer theId){
+        TreeNode<Integer, Integer> x = root;
+        if(root == null) return new TreeNode<Integer,Integer>(Color.BLACK, 0, 0);
+        while(x != null){
+            if(x.key <= theId){
+                x = x.right;
+            }else{
+                if(x.left == null || x.left.key <= theId){
+                    return new TreeNode<Integer, Integer>(Color.BLACK, x.key, x.val);
+                }else{
+                    x = x.left;
+                }
+            }
+        }
+        return new TreeNode<Integer,Integer>(Color.BLACK, 0, 0);
+    }
+
+    public TreeNode<Integer, Integer> previous(Integer theId){
+        TreeNode<Integer, Integer> x = root;
+        if(root == null) return new TreeNode<Integer,Integer>(Color.BLACK, 0, 0);
+        while(x != null){
+            if(x.key >= theId){
+                x = x.left ;
+            }else{
+                // x.key < theId
+                // now x is a candidate
+                if(x.right == null || x.right.key >= theId){
+                    // select x
+                    return new TreeNode<Integer, Integer>(Color.BLACK, x.key, x.val);
+                }else{
+                    x = x.right;
+                }
+            }
+        }
+        return new TreeNode<Integer,Integer>(Color.BLACK, 0, 0);
+    }
 }
