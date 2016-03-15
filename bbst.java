@@ -3,34 +3,97 @@
 // the file "file-name" contains the initial sorted list
 
 import main.*;
-
+import java.io.*;
+import java.util.*;
 public class bbst {
     public static void main(String[] args) {
-        RedBlackTreeInteger rbt = new RedBlackTreeInteger();
-        rbt.insert(1, 4);
-        rbt.insert(2, 2);
-        rbt.insert(5, 1);
-        rbt.insert(6, 2);
-        rbt.insert(3, 2);
-        rbt.insert(1, 2);
-        System.out.println(rbt.toString());
-        rbt.delete(0);
-        System.out.println(rbt.toString());
-        rbt.delete(2);
-        System.out.println(rbt.toString());
-        rbt.increase(2,4);
-        System.out.println(rbt.toString());
-        rbt.reduce(2,2);
-        System.out.println(rbt.toString());
-        System.out.println("count 2:"+rbt.count(2));
-        System.out.println("inrange 3 5:"+rbt.inRange(3,5));
-        System.out.println("inrange 2 7:"+rbt.inRange(2,7));
-        System.out.println("next 2:"+rbt.next(2).key+","+rbt.next(2).val);
-        System.out.println("next 4:"+rbt.next(4).key+","+rbt.next(4).val);
-        System.out.println("next 6:"+rbt.next(6).key+","+rbt.next(6).val);
+        if(args.length == 0){
+            System.out.println("please specify input file");
+            return;
+        }
 
-        System.out.println("previous 3:"+rbt.previous(3).key+","+rbt.previous(3).val);
-        System.out.println("previous 1:"+rbt.previous(1).key+","+rbt.previous(1).val);
-        System.out.println("previous 6:"+rbt.previous(6).key+","+rbt.previous(6).val);
+
+        RedBlackTreeInteger rbt = new RedBlackTreeInteger();
+        String textPath = args[0];
+        InputStream is = null;
+        try {
+            is = new FileInputStream(textPath);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"), 512);
+            for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+                line = line.trim();
+                String[] as = line.split(" ");
+                if(as.length >= 2){
+                    Integer id = new Integer(as[0]);
+                    Integer count = new Integer(as[1]);
+                    rbt.insert(id,count);
+                }
+            }
+        }catch (FileNotFoundException fnfe){
+            fnfe.printStackTrace();
+        }catch (IOException ioe){
+            ioe.printStackTrace();
+        } finally {
+            try {
+                if (is != null) {
+                    is.close();
+                    is = null;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        Scanner input = new Scanner(System.in);
+        System.out.print("input command (click return to exit): ");
+        String command = input.nextLine();
+        while(command.length() >= 2){
+
+            String[] commands = command.split(" ");
+            if(commands.length <= 1){
+                System.out.println("invalid command1: "+command);
+            }else{
+                // commands.length >= 2
+                if(commands[0].equals("increase") && commands.length >= 3){
+                    // Increase(theID, m)
+                    Integer theId = new Integer(commands[1]);
+                    Integer m = new Integer(commands[2]);
+                    System.out.println(command+": "+rbt.increase(theId, m));
+
+                }else if(commands[0].equals("reduce") && commands.length >= 3){
+                    // Reduce(theID, m)
+                    Integer theId = new Integer(commands[1]);
+                    Integer m = new Integer(commands[2]);
+                    System.out.println(command+": "+rbt.reduce(theId, m));
+
+                }else if(commands[0].equals("count") && commands.length >= 2){
+                    // Count(theID)
+                    Integer theId = new Integer(commands[1]);
+                    System.out.println(command+": "+rbt.count(theId));
+
+                }else if(commands[0].equals("inrange") && commands.length >= 3){
+                    // InRange(ID1, ID2)
+                    Integer id1 = new Integer(commands[1]);
+                    Integer id2 = new Integer(commands[2]);
+                    System.out.println(command+": "+rbt.inRange(id1, id2));
+
+                }else if(commands[0].equals("next") && commands.length >= 2){
+                    // Next(theID)
+                    Integer theId = new Integer(commands[1]);
+                    TreeNode<Integer, Integer> res = rbt.next(theId);
+                    System.out.println(command+": "+res.key+" "+res.val);
+
+                }else if(commands[0].equals("previous") && commands.length >= 2){
+                    // Previous(theID)
+                    Integer theId = new Integer(commands[1]);
+                    TreeNode<Integer, Integer> res = rbt.previous(theId);
+                    System.out.println(command+": "+res.key+" "+res.val);
+
+                }else{
+                    System.out.println("invalid command: "+command);
+                }
+            }
+
+            System.out.print("input command (click return to exit): ");
+            command = input.nextLine();
+        }
     }
 }

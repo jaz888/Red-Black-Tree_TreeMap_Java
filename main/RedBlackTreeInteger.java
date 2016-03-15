@@ -50,31 +50,23 @@ public class RedBlackTreeInteger extends RedBlackTree<Integer, Integer>{
     public Integer inRangeHelper(TreeNode<Integer, Integer> node, Integer id1, Integer id2){
         if(id1 > id2 || node == null) return 0;
         Integer sum = 0;
-        System.out.println("node.key="+node.key);
-        System.out.println("id1="+id1);
-        System.out.println("id2="+id2);
-        System.out.println();
         if(node.key > id1 && node.key < id2){
-            System.out.println("add");
             sum += node.val;
             sum += inRangeHelper(node.left, id1, node.key-1);
             sum += inRangeHelper(node.right, node.key+1, id2);
         }else if(node.key >= id2){
             // check node's left child
             if(node.key == id2){
-                System.out.println("add");
                 sum += node.val;
             }
             sum += inRangeHelper(node.left, id1, id2);
         }else if(node.key <= id1){
             // check node's left child
             if(node.key == id1){
-                System.out.println("add");
                 sum += node.val;
             }
             sum += inRangeHelper(node.right, id1, id2);
         }
-        System.out.println("sum="+sum);
         return sum;
     }
 
@@ -85,7 +77,7 @@ public class RedBlackTreeInteger extends RedBlackTree<Integer, Integer>{
             if(x.key <= theId){
                 x = x.right;
             }else{
-                if(x.left == null || x.left.key <= theId){
+                if(x.left == null){
                     return new TreeNode<Integer, Integer>(Color.BLACK, x.key, x.val);
                 }else{
                     x = x.left;
@@ -104,7 +96,7 @@ public class RedBlackTreeInteger extends RedBlackTree<Integer, Integer>{
             }else{
                 // x.key < theId
                 // now x is a candidate
-                if(x.right == null || x.right.key >= theId){
+                if(x.right == null){
                     // select x
                     return new TreeNode<Integer, Integer>(Color.BLACK, x.key, x.val);
                 }else{
