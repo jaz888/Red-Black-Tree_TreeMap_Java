@@ -172,6 +172,12 @@ public class RedBlackTree<K extends Comparable<? super K>, V> {
         return null;
     }
 
+    public V get(K key){
+        TreeNode<K,V> res = find(key);
+        if(res == null) return null;
+        return res.val;
+    }
+
     public TreeNode<K, V> getMinimum(TreeNode<K, V> x){
         if(x == null) return null;
         while(x.left != null) x = x.left;
