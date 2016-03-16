@@ -1,5 +1,5 @@
-# Java-HashMap-Red-Black-Tree
-A Java HashMap implementation based on Red-Black Tree.
+# Java_TreeMap_Red-Black-Tree
+A Java TreeMap implementation based on Red-Black Tree.
 ## Usage:
 - Import Color.java, TreeNode.java, RedBlackTree.java seperately.
 - Declaration: RedBlackTree<K*, V> rbt = new RedBlackTree<>();
