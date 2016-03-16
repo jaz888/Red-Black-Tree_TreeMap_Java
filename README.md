@@ -1,4 +1,4 @@
-# Java_TreeMap_Red-Black-Tree
+# Red-Black-Tree_TreeMap_Java
 A Java TreeMap implementation based on Red-Black Tree.
 ## Usage:
 - Import Color.java, TreeNode.java, RedBlackTree.java seperately.
