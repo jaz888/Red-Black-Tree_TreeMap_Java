@@ -43,12 +43,12 @@ public class bbst {
             }
         }
         Scanner input = new Scanner(System.in);
-        System.out.print("input command (click return to exit): ");
+        System.out.print("input command: ");
         String command = input.nextLine();
-        while(command.length() >= 2){
+        while(command.length() >= 1){
 
             String[] commands = command.split(" ");
-            if(commands.length <= 1){
+            if(commands.length < 1){
                 System.out.println("invalid command1: "+command);
             }else{
                 // commands.length >= 2
@@ -56,43 +56,47 @@ public class bbst {
                     // Increase(theID, m)
                     Integer theId = new Integer(commands[1]);
                     Integer m = new Integer(commands[2]);
-                    System.out.println(command+": "+rbt.increase(theId, m));
+                    System.out.println(rbt.increase(theId, m));
 
                 }else if(commands[0].equals("reduce") && commands.length >= 3){
                     // Reduce(theID, m)
                     Integer theId = new Integer(commands[1]);
                     Integer m = new Integer(commands[2]);
-                    System.out.println(command+": "+rbt.reduce(theId, m));
+                    System.out.println(rbt.reduce(theId, m));
 
                 }else if(commands[0].equals("count") && commands.length >= 2){
                     // Count(theID)
                     Integer theId = new Integer(commands[1]);
-                    System.out.println(command+": "+rbt.count(theId));
+                    System.out.println(rbt.count(theId));
 
                 }else if(commands[0].equals("inrange") && commands.length >= 3){
                     // InRange(ID1, ID2)
                     Integer id1 = new Integer(commands[1]);
                     Integer id2 = new Integer(commands[2]);
-                    System.out.println(command+": "+rbt.inRange(id1, id2));
+                    System.out.println(rbt.inRange(id1, id2));
 
                 }else if(commands[0].equals("next") && commands.length >= 2){
                     // Next(theID)
                     Integer theId = new Integer(commands[1]);
                     TreeNode<Integer, Integer> res = rbt.next(theId);
-                    System.out.println(command+": "+res.key+" "+res.val);
+                    System.out.println(res.key+" "+res.val);
 
                 }else if(commands[0].equals("previous") && commands.length >= 2){
                     // Previous(theID)
                     Integer theId = new Integer(commands[1]);
                     TreeNode<Integer, Integer> res = rbt.previous(theId);
-                    System.out.println(command+": "+res.key+" "+res.val);
+                    System.out.println(res.key+" "+res.val);
+
+                }else if(commands[0].equals("quit")){
+                    // quit
+                    return;
 
                 }else{
                     System.out.println("invalid command: "+command);
                 }
             }
 
-            System.out.print("input command (click return to exit): ");
+            System.out.print("input command: ");
             command = input.nextLine();
         }
     }

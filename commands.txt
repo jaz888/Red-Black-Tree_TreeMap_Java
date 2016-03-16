@@ -1,0 +1,21 @@
+increase 350 100
+reduce 350 50
+count 350
+inrange 300 1000
+inrange 200 299
+inrange 200 1000
+inrange 300 349
+inrange 350 350
+inrange 349 350
+next 300
+next 349
+next 360
+previous 360
+previous 350
+previous 0
+reduce 271 6
+previous 350
+reduce 271 3
+previous 350
+previous 150
+quit

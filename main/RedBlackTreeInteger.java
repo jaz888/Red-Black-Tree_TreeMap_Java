@@ -33,7 +33,7 @@ public class RedBlackTreeInteger extends RedBlackTree<Integer, Integer>{
             if(node.val <= 0){
                 delete(key);
             }
-            return value;
+            return value < 0 ? 0 : value;
         }
     }
 
@@ -50,60 +50,46 @@ public class RedBlackTreeInteger extends RedBlackTree<Integer, Integer>{
     public Integer inRangeHelper(TreeNode<Integer, Integer> node, Integer id1, Integer id2){
         if(id1 > id2 || node == null) return 0;
         Integer sum = 0;
-        if(node.key > id1 && node.key < id2){
+        if(node.key <= id2 && node.key >= id1){
+            // check if node is in range
             sum += node.val;
-            sum += inRangeHelper(node.left, id1, node.key-1);
-            sum += inRangeHelper(node.right, node.key+1, id2);
+        }
+        if(node.key > id1 && node.key < id2){
+            sum += inRangeHelper(node.left, id1, id2);
+            sum += inRangeHelper(node.right, id1, id2);
         }else if(node.key >= id2){
             // check node's left child
-            if(node.key == id2){
-                sum += node.val;
-            }
             sum += inRangeHelper(node.left, id1, id2);
         }else if(node.key <= id1){
             // check node's left child
-            if(node.key == id1){
-                sum += node.val;
-            }
             sum += inRangeHelper(node.right, id1, id2);
         }
         return sum;
     }
 
     public TreeNode<Integer, Integer> next(Integer theId){
-        TreeNode<Integer, Integer> x = root;
-        if(root == null) return new TreeNode<Integer,Integer>(Color.BLACK, 0, 0);
-        while(x != null){
-            if(x.key <= theId){
-                x = x.right;
-            }else{
-                if(x.left == null){
-                    return new TreeNode<Integer, Integer>(Color.BLACK, x.key, x.val);
-                }else{
-                    x = x.left;
-                }
-            }
-        }
-        return new TreeNode<Integer,Integer>(Color.BLACK, 0, 0);
+        TreeNode<Integer, Integer> res = nextHelper(this.root, theId, null);
+        if(res == null) return new TreeNode<Integer,Integer>(Color.BLACK, 0, 0);
+        else return res;
+    }
+
+    public TreeNode<Integer, Integer> nextHelper(TreeNode<Integer, Integer> node, Integer target, TreeNode<Integer, Integer> candidate){
+        if(node == null) return candidate;
+        if(node.key > target) candidate = node;
+        if(node.key <= target) return nextHelper(node.right, target, candidate);
+        else return nextHelper(node.left, target, candidate);
     }
 
     public TreeNode<Integer, Integer> previous(Integer theId){
-        TreeNode<Integer, Integer> x = root;
-        if(root == null) return new TreeNode<Integer,Integer>(Color.BLACK, 0, 0);
-        while(x != null){
-            if(x.key >= theId){
-                x = x.left ;
-            }else{
-                // x.key < theId
-                // now x is a candidate
-                if(x.right == null){
-                    // select x
-                    return new TreeNode<Integer, Integer>(Color.BLACK, x.key, x.val);
-                }else{
-                    x = x.right;
-                }
-            }
-        }
-        return new TreeNode<Integer,Integer>(Color.BLACK, 0, 0);
+        TreeNode<Integer, Integer> res = previousHelper(this.root, theId, null);
+        if(res == null) return new TreeNode<Integer,Integer>(Color.BLACK, 0, 0);
+        else return res;
+    }
+
+    public TreeNode<Integer, Integer> previousHelper(TreeNode<Integer, Integer> node, Integer target, TreeNode<Integer, Integer> candidate){
+        if(node == null) return candidate;
+        if(node.key < target) candidate = node;
+        if(node.key < target) return previousHelper(node.right, target, candidate);
+        else return previousHelper(node.left, target, candidate);
     }
 }

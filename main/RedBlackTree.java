@@ -154,9 +154,28 @@ public class RedBlackTree<K extends Comparable<? super K>, V> {
         this.root.color = Color.BLACK;
     }
 
+    public TreeNode<K, V> higherEntry(K key){
+        TreeNode<K, V> x = this.find(key);
+        if(x == null) return null;
+        if(x.right != null){
+            // find the leftmost child of x.right
+            x = x.right;
+            while(x.left != null){
+                x = x.left;
+            }
+            return x;
+        }else{
+            // find find x's ancestor of which x is in the left portion
+            while(x.parent != null){
+                if(x.parent.left == x)return x;
+                x = x.parent;
+            }
+            return null;
+        }
+    }
+
     public TreeNode<K, V> find(K key){
         TreeNode<K, V> x = this.root;
-        TreeNode<K, V> y = null;
         while(x != null){
             if(key.compareTo(x.key) == 0){
                 // key == x.key
