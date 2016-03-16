@@ -2,7 +2,7 @@
 // need to support redirected input from a file "file-name" which specified in terminal
 // the file "file-name" contains the initial sorted list
 
-import main.*;
+import com.jieao.*;
 import java.io.*;
 import java.util.*;
 public class bbst {

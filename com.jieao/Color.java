@@ -1,4 +1,4 @@
-package main;
+package com.jieao;
 
 public enum Color {
     RED, BLACK

@@ -1,4 +1,4 @@
-package main;
+package com.jieao;
 public class RedBlackTreeInteger extends RedBlackTree<Integer, Integer>{
 
     public Integer increase(Integer key, Integer addition){

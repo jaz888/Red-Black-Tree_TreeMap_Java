@@ -1,4 +1,4 @@
-package main;
+package com.jieao;
 
 public class TreeNode<K extends Comparable, V> {
     public Color color;
@@ -24,5 +24,5 @@ public class TreeNode<K extends Comparable, V> {
         this.right = null;
     }
 
-    
+
 }
