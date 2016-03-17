@@ -262,6 +262,7 @@ public class RedBlackTree<K extends Comparable<? super K>, V> {
     }
 
     public void deleteFixup(TreeNode<K, V> x){
+        if(x == null)return;
         TreeNode<K, V> w = null;
         while(x != this.root && x.color == Color.BLACK){
             if(x == x.parent.left){
