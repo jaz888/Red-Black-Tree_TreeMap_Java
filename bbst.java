@@ -1,5 +1,4 @@
-// test program for red black tree
-import com.jieao.*;
+import main.*;
 import java.io.*;
 import java.util.*;
 public class bbst {
@@ -16,7 +15,12 @@ public class bbst {
         try {
             is = new FileInputStream(textPath);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"), 512);
+            Long linesRead = 0L;
             for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+                if(linesRead % 10000000L == 0){
+                    System.out.print(10*linesRead/10000000L);
+                    System.out.println(" million lines done.");
+                }
                 line = line.trim();
                 String[] as = line.split(" ");
                 if(as.length >= 2){
@@ -24,6 +28,7 @@ public class bbst {
                     Integer count = new Integer(as[1]);
                     rbt.insert(id,count);
                 }
+                linesRead++;
             }
         }catch (FileNotFoundException fnfe){
             fnfe.printStackTrace();
@@ -39,8 +44,9 @@ public class bbst {
                 e.printStackTrace();
             }
         }
+        System.out.println("finish reading file, please input commands:");
         Scanner input = new Scanner(System.in);
-        System.out.print("input command: ");
+        //System.out.print("input command: ");
         String command = input.nextLine();
         while(command.length() >= 1){
 
@@ -93,7 +99,7 @@ public class bbst {
                 }
             }
 
-            System.out.print("input command: ");
+            //System.out.print("input command: ");
             command = input.nextLine();
         }
     }
